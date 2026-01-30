@@ -1,15 +1,23 @@
 # Python
 __pycache__/
 *.pyc
+*.log
 
 # Virtual Environments
 env/
 .venv/
 
 # Django
-db.sqlite3
 .env
+db.sqlite3
 
-# IDE
+# Database backups
+backup.json
+
+# Old / broken migrations (local only)
+new_form/migrations/0002_*.py
+new_form/migrations/0003_*.py
+
+# IDEs
 .idea/
 .vscode/

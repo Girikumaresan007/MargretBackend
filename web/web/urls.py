@@ -34,6 +34,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('margret/', include('margret.urls')),
+
     path('new_form/', include('new_form.urls')),
 
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0)),
