@@ -1,43 +1,44 @@
 """
-URL configuration for web project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+URL configuration for the project.
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from rest_framework_simplejwt.views import TokenRefreshView
 
+# --------------------------------------------------
+# SWAGGER CONFIG (ONE SINGLE SCHEMA)
+# --------------------------------------------------
 schema_view = get_schema_view(
     openapi.Info(
-        title="Combined API",
+        title="Combined Project API",
         default_version="v1",
-        description="Client + Book APIs",
+        description="Margret + New Form + Admin Authentication APIs",
+        contact=openapi.Contact(email="admin@gmail.com"),
+        license=openapi.License(name="MIT License"),
     ),
     public=True,
-    permission_classes=[permissions.AllowAny],
+    permission_classes=(permissions.AllowAny,),
 )
 
+# --------------------------------------------------
+# URL PATTERNS
+# --------------------------------------------------
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # Admin
+    path("admin/", admin.site.urls),
 
-    path('margret/', include('margret.urls')),
+    # App URLs
+    path("margret/", include("margret.urls")),
+    path("new_form/", include("new_form.urls")),
 
-    path('new_form/', include('new_form.urls')),
+    # Auth / API URLs
+    path("api/", include("login.urls")),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0)),
+    # Swagger Docs
+    path("swagger/", schema_view.with_ui("swagger", cache_timeout=0), name="swagger-ui"),
 ]
-
-

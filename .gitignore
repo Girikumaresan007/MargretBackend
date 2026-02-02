@@ -1,4 +1,4 @@
-# Python
+	# Python
 __pycache__/
 *.pyc
 *.log
@@ -21,3 +21,23 @@ new_form/migrations/0003_*.py
 # IDEs
 .idea/
 .vscode/
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Django
+db.sqlite3
+
+# Virtual environments
+env/
+.venv/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
